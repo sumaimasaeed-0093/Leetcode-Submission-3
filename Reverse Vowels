@@ -1,0 +1,39 @@
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+int isVowel(char ch) {
+    ch = tolower(ch);  
+    return (ch=='a' || ch=='e' || ch=='i' || ch=='o' || ch=='u');
+}
+
+void reverseOnlyVowels(char str[]) {
+    int left = 0;
+    int right = strlen(str) - 1;
+
+    while (left < right) {     // Dono pointers aapas me move karte rahenge
+
+        while (left < right && !isVowel(str[left]))    // Jab tak vowel na mile, left pointer aage badhao
+            left++;
+
+        while (left < right && !isVowel(str[right]))      // Jab tak vowel na mile, right pointer peeche lao
+            right--;
+
+        char temp = str[left];
+        str[left] = str[right];
+        str[right] = temp;
+
+        left++;
+        right--;
+    }
+}
+
+int main() {
+    char s[] = "IceCreAm";
+
+    reverseOnlyVowels(s);
+
+    printf("Reverse vowels string: %s\n", s);
+
+    return 0;
+}
